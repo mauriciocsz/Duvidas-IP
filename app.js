@@ -17,5 +17,11 @@ app.listen(process.env.port || 3000);
 
 console.log("Running");
 
+const query = require("./src/db_query");
+const dbmanager = require("./src/db_manager");
 
-
+//Placeholder callback test
+function testeCallback(data){
+    console.log("Data recieved:")
+    console.log(data)
+}
