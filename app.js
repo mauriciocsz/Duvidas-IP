@@ -37,6 +37,7 @@ console.log("Running");
 const query = require("./src/db_query");
 const dbmanager = require("./src/db_manager");
 
+
 //Placeholder callback test
 function testeCallback(data){
     console.log("Data recieved:")

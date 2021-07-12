@@ -4,12 +4,12 @@ const query = require("./db_query");
 function insertQuestion(values = {},callback){
     const idgen = require("./id_generator");
     var id = idgen({prefix:"IP"});
-    query("INSERT INTO tb_duvidas (id,ra,nome,contato,duvida,lista,ex,status) values ($1,$2,$3,$4,$5,$6,$7,$8);",
-    [id,values.ra,values.nome,values.contato,values.duvida,values.lista,values.ex,0]).then(data => {
+    query("INSERT INTO tb_duvidas (id,ra,nome,contato,duvida,lista,ex,status,titulo) values ($1,$2,$3,$4,$5,$6,$7,$8,$9);",
+    [id,values.ra,values.nome,values.contato,values.duvida,values.lista,values.ex,0,values.titulo]).then(data => {
         if(data==-1)
-            callback (-1);
+            callback (values.res, -1);
         else
-            callback (1);
+            callback (values.res, id);
     })
 }
 
@@ -29,7 +29,7 @@ function retrieveQuestions(values = {},callback){
 module.exports =  function opManager(values = {}, callback){
     switch(values.op){
         case 1:
-            if(values.ra && values.nome && values.contato && values.duvida && values.lista && values.ex)
+            if(values.ra!="" && values.nome!="" && values.contato!="" && values.duvida!="" && values.lista!="" && values.ex!="" && values.titulo!="")
                 insertQuestion(values,callback);
             else return -1;
             break;
