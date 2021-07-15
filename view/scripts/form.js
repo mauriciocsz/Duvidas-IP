@@ -68,6 +68,7 @@ function submitForm() {
         //If the operation was successful redirect to the sucess page
         if(obj.res){
             document.getElementById("protocolo").value = obj.protocol;
+            sessionStorage.setItem("protocol",obj.protocol);
             document.getElementById("formProtocol").submit()
         }else
             alert("Um erro ocorreu! Tente novamente mais tarde")

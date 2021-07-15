@@ -23,9 +23,20 @@ function retrieveQuestions(values = {},callback){
     })
 }
 
+//Retrieves all the values from a certain question
+function retrieveQuestionData(values = {}, callback){
+    query("SELECT * FROM tb_duvidas WHERE id=$1",[values.protocol]).then(data=>{
+        if(data==-1)
+            callback(values.res, -1);
+        else
+            callback(values.res, data.rows[0])
+    })
+}
+
 //Function responsible for deciding which operation will take place
 // 1 = insert Question;
 // 2 = retrieve questions based on RA
+// 3 = retrieve question data based on the protocol
 module.exports =  function opManager(values = {}, callback){
     switch(values.op){
         case 1:
@@ -37,6 +48,12 @@ module.exports =  function opManager(values = {}, callback){
             if(values.ra)
                 retrieveQuestions(values,callback);
             else return -1;
+            break;
+        case 3:
+            if(values.protocol)
+                retrieveQuestionData(values,callback)
+            else
+                return -1;
             break;
         default:
             return;

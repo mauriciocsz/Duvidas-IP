@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="stylesheet" href="stylesheets/style.css">
+
+    </head>
+
+    <body style="background-color: #ff9248;">   
+        <input id="protocol" type="text" name="protocol" placeholder="IP-xxxx-0000"> 
+        <input type="button" name="submit" value="Submit" onclick="getQuestion()">
+
+        <div id="question">
+            
+        </div>
+    </body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src = "/socket.io/socket.io.js"></script>
+    <script src="./scripts/search.js"></script>
+</html>

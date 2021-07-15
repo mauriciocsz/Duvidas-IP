@@ -8,6 +8,26 @@ router.get('/', function(req,res){
     res.sendFile(path.resolve( __dirname+'/../view/index.html'))
 })
 
+router.get('/perguntar', function(req,res){
+    res.sendFile(path.resolve(__dirname+'/../view/form.html'))
+})
+
+router.get('/search', function(req,res){
+    res.sendFile(path.resolve(__dirname+'/../view/search.html'))
+})
+
+router.post('/getQuestion',function(req,res){
+
+    var values = {
+        op:3,
+        protocol: req.body.protocol,
+        res: res
+    }
+
+    dbmanager(values,returnQuestion);
+    
+})
+
 router.post('/post', function(req,res,next){
     
     var values = {
@@ -27,7 +47,7 @@ router.post('/post', function(req,res,next){
 })
 
 router.post('/success',function(req,res,next){
-    res.send("Questão cadastrada! O protocolo dessa questão é : "+req.body.protocolo);
+    res.sendFile(path.resolve( __dirname+'/../view/success.html'));
 })
 
 //Callback function called after the INSERT of a question is done
@@ -38,6 +58,16 @@ function returnProtocol(res, protocol){
     //Otherwise, send back the protocol of the question
     else
         res.send({res: 1, protocol: protocol })
+}
+
+//Callback function called when the question's SEARCCH is done
+function returnQuestion(res,question){
+    //If we have recieved a question then send it back
+    if(question && question!=-1){
+        res.send({res:1, question: question})
+    }else
+        res.send({res: 0})
+    
 }
 
 module.exports = router;

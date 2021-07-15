@@ -7,27 +7,7 @@
     </head>
 
     <body style="background-color: #ff9248;">   
-
-            <input id="RA" type="number" name="RA" placeholder="111111">
-            <input id="titulo" type="text" name="titulo" placeholder="Título da dúvida">
-            <input id="nome" type="text" name="nome" placeholder="Carlos">
-            <input id="contato" type="text" placeholder="Telefone ou Email">
-
-            <select id="Lista">
-            </select>
-            <select id="Exercicios">
-            </select>
-            <textarea id="duvida" name="duvida" rows="5" cols="40"></textarea>
-            <input type="button" name="submit" value="Submit" onclick="submitForm()"><br><br>
-
-        <form id="formProtocol" method="post" action="/success" style="visibility: hidden;">
-            <input id="protocolo" type="text" name="protocolo">
-        </form>
-
-        <script>if ( window.history.replaceState ){ window.history.replaceState( null, null, window.location.href ); } </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src = "/socket.io/socket.io.js"></script>
-        <script src="/scripts/form.js"></script>
+        <button id="newQuestion" onclick="location.href='/perguntar';">Nova pergunta</button>
+        <button id="checkQuestion " onclick="location.href='/search';">Checar uma pergunta já existente</button>
     </body>
-
 </html>
