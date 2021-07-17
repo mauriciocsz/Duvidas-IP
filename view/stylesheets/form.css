@@ -1,0 +1,156 @@
+#question{
+    transition: opacity 2s ease-out;
+    opacity: 1;
+    overflow: hidden;
+    display: none;
+}
+
+.dot{
+    height: 25px;
+    width: 25px;
+    background-color: #DB4437;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+#fuck.dot:hover #card{
+    max-height: 800px;
+    transition: max-height 0.5 ease-in;
+
+}
+
+
+
+@keyframes fadeIn {
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+
+#question{
+    opacity: 0;
+    animation: fadeIn 1.0s;
+    animation-fill-mode: forwards;
+}
+
+#info{
+    opacity: 0;
+    animation: fadeIn 1.0s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes getBigger {
+
+    0%{
+        height: 0px;
+    }
+    100%{
+        height: 590px;
+    }
+    
+}
+
+@keyframes getBigger2 {
+
+    0%{
+        height: 590px;
+    }
+    100%{
+        height: 710px;
+    }
+    
+}
+
+@keyframes boxAppear{
+
+    0% { transform: scale(.001);}
+    50% { transform: scale(.002);}
+    100% { transform: scale(1);}
+    
+}
+
+#spinner{
+    display: block;
+}
+
+#card{
+    max-height:1200px; 
+    height:fit-content;
+    width: 100%; 
+    border: none;
+    animation: boxAppear 1s;
+    animation-fill-mode: forwards;
+    animation-play-state: running, paused;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+input[type=number] {
+    -moz-appearance:textfield; 
+}
+
+#divTitulo{
+    width: 77%;
+}
+
+#Exercicios{
+    width: 100%;
+}
+
+#Lista{
+    width: 100%;
+}
+
+@media(max-width:1700px){
+    #divTitulo{
+        width: 100%;
+    }
+}
+
+
+@media (max-width:900px){
+
+    .fileCard{
+        margin-left: auto;
+        margin-right: auto;
+        width: 100vw; 
+    }
+
+}
+
+@media (min-width:900px) and (max-width: 1300px){
+
+
+    .fileCard{
+        margin-top: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 65vw; 
+    }
+    
+}
+
+
+@media (min-width:1300px){
+
+    #novaPergunta{
+        width: 490px;
+    }
+
+
+    .fileCard{
+        margin-top: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40vw; 
+    }
+
+}
+

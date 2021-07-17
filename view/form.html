@@ -2,11 +2,136 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/form.css">
 
     </head>
 
-    <body style="background-color: #ff9248;">   
+    <body style="background: no-repeat center top fixed;
+    background-color: #5e666d;
+    background-image:url(/stylesheets/resources/bg.png);
+    background-position: center;
+    background-size:cover;
+    "> 
+        
+        <div class ="fileCard" id="fileCard">
+            <div id="card" class="card" style="border: none;">
+                <div class="card-header" style="background-color: #1e1e1e; ">
+                  <span class="dot" style="
+                  background-color: #DB4437;"></span> 
+                  <span class="dot" style="
+                  background-color: #F4B400;"></span> 
+                  <span class="dot" style="
+                  background-color: #0F9D58;"></span> 
+                  
+                  <label id="nova pergunta" style=" color: white;">Nova pergunta</label>
+                  
+                </div>
+
+                <div id="cardBody" class="card-body" style="margin:5%; height: fit-content;display:initial;">
+              
+                  <div id="question" class="navigator">
+
+                <div class="form-group" style="margin: 1%;">
+                    <h5 class="card-title">Dúvida</h5>
+
+
+
+                    <!-- Título -->
+                    <br>
+                    <div class="row g-3">
+                      <div class="col-sm-9" id="divTitulo">
+                      <label for="titulo">Título</label>
+                      <input type="text" class="form-control" id="titulo" placeholder="" aria-describedby="passwordHelpBlock">
+                      <small id="passwordHelpBlock" class="form-text text-muted" >
+                          Tente explicar a dúvida de maneira breve
+                      </small>
+                  </div>
+
+                  <!-- Lista-->
+                    <div class="col-sm-2" style="width: fit-content;">
+                      <label id="listaLabel"  for="Lista" style="text-align: center;">Lista</label>
+                      <select id="Lista" class="form-control" style="text-align-last: center ;">
+                      </select>
+                    </div>
+                  <!--Exericicios-->
+                    <div class="col-sm-2"  style="width: fit-content;">
+                      <label for="Exercicios" style="text-align: center">Exercício</label>
+                      <select id="Exercicios" class="form-control" style=" text-align-last: center;">
+                      </select>
+                    </div>
+
+                  </div>
+
+                  <br>
+
+                  <div class="form-group">
+                      <label for="duvida">Dúvida</label>
+                      <textarea class="form-control" id="duvida" rows="10" style="resize: none;" placeholder="Qual é o problema?" aria-describedby="duvidaHelp"></textarea>
+                      <small id="duvidaHelp" class="form-text text-muted" >
+                          Tente informar o máximo de detalhes possíveis, assim podemos ter uma boa ideia da situação. Não envie o código inteiro neste campo, o mesmo será analisado posteriormente.
+                      </small>  
+
+                      <div style="float: left;" class="invalid-feedback">
+                        Preencha os campos em vermelho.
+                      </div>
+                  </div>
+
+                </div>
+              
+                <div class="row justify-content-center">
+                    <button id="sendBtn" type="submit" class="btn btn-primary" style="margin: 5%;margin-bottom: 0%; width: 50%; background-color:#0F9D58 ;border: none;" onclick="submitForm()">
+                      Enviar Questão</button>
+                  </div>
+
+                    </div>  
+              
+                  <div id="info" style="display: block;" class="navigator">
+                    <div class="form-group" style="margin: 0%;">
+                    
+                        <h5 class="card-title">Informações</h5>
+                            
+    
+                        <!-- Nome -->
+                        <label for="nome" style="margin-top: 2%">Nome</label>
+                        
+                        <input type="text" class="form-control" id="nome" placeholder="" aria-describedby="passwordHelpBlock"style="margin-top: 1%;">
+                        
+                        <br>
+                        <!-- RA -->
+                        <div class="form-group col-md-4">
+                            <label for="RA">RA</label>
+                            <input id="RA" type="number" class="form-control" aria-describedby="passwordHelpBlock"style="margin-top: 1%;">
+                            
+                        </div>
+                        <small id="passwordHelpBlock" class="form-text text-muted" >
+                            Precisamos do seu RA para acessar os seus exercícios já enviados e analizá-los caso seja necessário.
+                        </small>
+    
+                        <br><br>
+    
+                        <!-- CONTATO -->
+                        <label for="contato" style="margin-top: 2%">Contato</label>
+                        <input type="text" class="form-control" id="contato" placeholder="Telefone ou Email" aria-describedby="passwordHelpBlock"style="margin-top: 1%;">
+                        <small id="passwordHelpBlock" class="form-text text-muted" >
+                            Caso seja necessário, entraremos em contato com você pelo meio informado.
+                        </small>
+    
+                        <div style="float: left;" class="invalid-feedback">
+                            Preencha os campos em vermelho.
+                          </div>
+    
+                    </div>
+                  
+                    <div class="row justify-content-center">
+                        <button type="submit" class="btn btn-primary" style="margin: 5%;margin-bottom: 0%; width: 50%;" onclick="loadNextPage()">
+                          Próximo</button>
+                      </div>
+                    </div>
+
+                </div>
+              </div> 
+          </div>
+          <!--- NAO MECHE AQUI EM BAIXO--
 
             <input id="RA" type="number" name="RA" placeholder="111111">
             <input id="titulo" type="text" name="titulo" placeholder="Título da dúvida">
@@ -19,13 +144,17 @@
             </select>
             <textarea id="duvida" name="duvida" rows="5" cols="40"></textarea>
             <input type="button" name="submit" value="Submit" onclick="submitForm()"><br><br>
-
-        <form id="formProtocol" method="post" action="/success" style="visibility: hidden;">
+    !-->
+        <form id="formProtocol" method="post" action="/success" style="display: none;">
             <input id="protocolo" type="text" name="protocolo">
         </form>
 
         <script>if ( window.history.replaceState ){ window.history.replaceState( null, null, window.location.href ); } </script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src = "/socket.io/socket.io.js"></script>
         <script src="/scripts/form.js"></script>
     </body>

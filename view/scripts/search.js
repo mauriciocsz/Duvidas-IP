@@ -19,8 +19,8 @@ function getQuestion(){
             createNode(div,obj.question.titulo)
             createNode(div,obj.question.duvida)
             createNode(div,obj.question.status)
-            createNode(div,obj.question.comentario)
-            createNode(div,obj.question.monitor)
+            createNode(div,obj.question.nome)
+            createNode(div,obj.question.ra)
 
         //Question was not found
         }else
@@ -33,5 +33,7 @@ function createNode(div, key){
 
     let node = document.createTextNode(key+" ")
     div.appendChild(node)
+    const lineBreak = document.createElement('br');
+    div.appendChild(lineBreak)
 
 }

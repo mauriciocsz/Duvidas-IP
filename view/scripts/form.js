@@ -38,6 +38,16 @@ function loadCurrentExercises(exQnt){
 
 //POSTS the question using XMLHttpRequest
 function submitForm() {
+
+    fields = ["nome","contato","RA","Lista","Exercicios","duvida"]
+    if(!checkFields(fields)){
+        return
+    }
+
+    let btn = document.getElementById("sendBtn");
+
+    btn.innerHTML = "<i id='spinner' class='fa fa-refresh fa-spin' ></i>"
+
     var http = new XMLHttpRequest();
     http.open("POST", "/post", true);
 
@@ -69,9 +79,13 @@ function submitForm() {
         if(obj.res){
             document.getElementById("protocolo").value = obj.protocol;
             sessionStorage.setItem("protocol",obj.protocol);
+            formSubmitting = true
             document.getElementById("formProtocol").submit()
-        }else
+        }else{
             alert("Um erro ocorreu! Tente novamente mais tarde")
+            btn.innerHTML= "Enviar Questão"
+        }
+            
     }
 }
 
@@ -80,3 +94,63 @@ function getElement(id){
     var str = document.getElementById(id).value;
     return str
 }
+
+function checkFields(fields){
+
+    var proceed = true;
+
+    for(var i=0;i<fields.length;i++){
+        //alert("bo")
+        let field = document.getElementById(fields[i]);
+        if(field.value==""){
+            field.className = "form-control is-invalid"
+            proceed=false
+        }
+        else
+            field.className= "form-control"
+        
+    }
+
+    return proceed
+
+}
+
+
+function loadNextPage(){
+
+    fields = ["nome","contato","RA"]
+    if(checkFields(fields)){
+        let info = document.getElementById("info")
+        let duvida = document.getElementById("question");
+        let card = document.getElementById("card");
+
+        card.style.animation = "getBigger2 1s"
+        
+
+        card.style.animationPlayState= "running"
+
+        //info.style.opacity="0"
+        //card.style.maxHeight="800px"
+        duvida.style.display = "block"
+        info.style.display = "none"
+        
+    }
+    
+}
+
+
+var formSubmitting = false;
+
+window.onload = function() {
+    window.addEventListener("beforeunload", function (e) {
+        if (formSubmitting) {
+            return undefined;
+        }
+
+        var confirmationMessage = 'It looks like you have been editing something. '
+                                + 'If you leave before saving, your changes will be lost.';
+
+        (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+        return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+    });
+};
