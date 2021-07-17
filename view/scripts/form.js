@@ -1,4 +1,5 @@
 const socket = io();
+var formSubmitting = false;
 
 //Whenever on the initialization of the form, load all lists
 //and get the exercise amount of the first list
@@ -48,6 +49,10 @@ function submitForm() {
 
     btn.innerHTML = "<i id='spinner' class='fa fa-refresh fa-spin' ></i>"
 
+    let card = document.getElementById("card");
+    let cardSucesso = document.getElementById("cardSucesso");
+
+
     var http = new XMLHttpRequest();
     http.open("POST", "/post", true);
 
@@ -77,10 +82,16 @@ function submitForm() {
 
         //If the operation was successful redirect to the sucess page
         if(obj.res){
-            document.getElementById("protocolo").value = obj.protocol;
-            sessionStorage.setItem("protocol",obj.protocol);
+            document.getElementById("protocolText").innerHTML = obj.protocol;
             formSubmitting = true
-            document.getElementById("formProtocol").submit()
+
+            card.style.animation = "boxDisappear 1s"
+            card.style.animationFillMode = "forwards"
+            card.style.animationPlayState= "running"
+
+            cardSucesso.style.display = "block"
+            card.style.display = "none"
+
         }else{
             alert("Um erro ocorreu! Tente novamente mais tarde")
             btn.innerHTML= "Enviar Questão"
@@ -95,12 +106,12 @@ function getElement(id){
     return str
 }
 
+//Check if all fields recieved are not empty
 function checkFields(fields){
 
     var proceed = true;
 
     for(var i=0;i<fields.length;i++){
-        //alert("bo")
         let field = document.getElementById(fields[i]);
         if(field.value==""){
             field.className = "form-control is-invalid"
@@ -108,14 +119,13 @@ function checkFields(fields){
         }
         else
             field.className= "form-control"
-        
     }
-
     return proceed
 
 }
 
 
+//Loads next form page
 function loadNextPage(){
 
     fields = ["nome","contato","RA"]
@@ -124,13 +134,11 @@ function loadNextPage(){
         let duvida = document.getElementById("question");
         let card = document.getElementById("card");
 
-        card.style.animation = "getBigger2 1s"
+        card.style.animation = "getBigger 1s"
         
 
         card.style.animationPlayState= "running"
 
-        //info.style.opacity="0"
-        //card.style.maxHeight="800px"
         duvida.style.display = "block"
         info.style.display = "none"
         
@@ -138,9 +146,7 @@ function loadNextPage(){
     
 }
 
-
-var formSubmitting = false;
-
+// Gets a warning before exiting the form
 window.onload = function() {
     window.addEventListener("beforeunload", function (e) {
         if (formSubmitting) {
@@ -154,3 +160,14 @@ window.onload = function() {
         return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
     });
 };
+
+//Function for copying the protocol into clipboard in one click
+function copyProtocol(){
+
+    const area = document.getElementById("copyTxtArea");
+    area.value = document.getElementById("protocolText").innerHTML;
+
+    area.select();
+
+    document.execCommand('copy');
+}

@@ -1,8 +1,66 @@
-#question{
-    transition: opacity 2s ease-out;
-    opacity: 1;
-    overflow: hidden;
-    display: none;
+.body{
+    background: no-repeat center top fixed;
+    background-color: #5e666d;
+    background-image:url(/stylesheets/resources/bg.png);
+    background-position: center;
+    background-size:cover;
+}
+
+#protocolText{
+    padding: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+#protocolOutline{
+    margin: 5%;
+    border:none;
+    border-radius: 2pt;
+    box-shadow: 0 0 1pt #6d757d;
+    outline:none;
+}
+
+#copyIcon{
+    position:absolute;
+    margin-top:5%;
+    margin-left: 16%; 
+    opacity: .75;
+    height: 25px;
+    width: 25px;
+}
+
+#boxColor, #boxColor2 {
+    background-color: #1e1e1e;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 45px;
+}
+
+#sendBtn{
+    margin: 5%;
+    margin-bottom: 0%;
+    width: 50%; 
+    background-color:#0F9D58 ;
+    border: none;
+}
+
+#btnOK{
+    width: 25%;
+    height: 5%;
+}
+
+.boxTitleDiv{
+    display: inline-block;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    border: none;
+    margin-top: 2%;
 }
 
 .dot{
@@ -13,13 +71,28 @@
     display: inline-block;
 }
 
-#fuck.dot:hover #card{
-    max-height: 800px;
-    transition: max-height 0.5 ease-in;
-
+.cardBody{
+    margin:5%; 
+    height: fit-content;
+    display:initial;
 }
 
+#question{
+    opacity: 0;
+    animation: fadeIn 1.0s;
+    animation-fill-mode: forwards;
+    overflow: hidden;
+    display: none;
+}
 
+#info{
+    margin-top: 5%;
+    opacity: 0;
+    animation: fadeIn 1.0s;
+    animation-fill-mode: forwards;
+}
+
+/*#region Animations */
 
 @keyframes fadeIn {
     50%{
@@ -30,37 +103,22 @@
     }
 }
 
-
-#question{
-    opacity: 0;
-    animation: fadeIn 1.0s;
-    animation-fill-mode: forwards;
-}
-
-#info{
-    opacity: 0;
-    animation: fadeIn 1.0s;
-    animation-fill-mode: forwards;
+@keyframes fadeOut {
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
 }
 
 @keyframes getBigger {
 
     0%{
-        height: 0px;
+        max-height: 590px;
     }
     100%{
-        height: 590px;
-    }
-    
-}
-
-@keyframes getBigger2 {
-
-    0%{
-        height: 590px;
-    }
-    100%{
-        height: 710px;
+        max-height: 750px;
     }
     
 }
@@ -73,8 +131,22 @@
     
 }
 
+@keyframes boxDisappear {
+    0% { transform: scale(1);}
+    50% { transform: scale(.002);}
+    100% { transform: scale(.001);}
+}
+
+/*#endregion */
+
 #spinner{
     display: block;
+}
+
+#cardSucesso{
+    animation: boxAppear 1s;
+    animation-fill-mode: forwards;
+    animation-play-state: running, paused;
 }
 
 #card{
@@ -87,6 +159,8 @@
     animation-play-state: running, paused;
 }
 
+/* Tirar as setas do input do RA */
+/* #region RA input*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -96,15 +170,13 @@ input[type=number] {
     -moz-appearance:textfield; 
 }
 
+/*#endregion */
+
 #divTitulo{
     width: 77%;
 }
 
-#Exercicios{
-    width: 100%;
-}
-
-#Lista{
+#Exercicios, #Lista{
     width: 100%;
 }
 
@@ -114,7 +186,21 @@ input[type=number] {
     }
 }
 
+@media(max-width:500px) {
+    #copyIcon{
+        margin-left:30%;
+    }
 
+    #successCadastro{
+        margin-top: 5%;
+    }
+
+    #btnOK{
+        height: 10%;
+    }
+}
+
+/* #region cardResponsivity */
 @media (max-width:900px){
 
     .fileCard{
@@ -137,13 +223,7 @@ input[type=number] {
     
 }
 
-
 @media (min-width:1300px){
-
-    #novaPergunta{
-        width: 490px;
-    }
-
 
     .fileCard{
         margin-top: 2%;
@@ -153,4 +233,6 @@ input[type=number] {
     }
 
 }
+
+/*#endregion */
 
