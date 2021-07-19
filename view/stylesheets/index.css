@@ -1,0 +1,142 @@
+#questionDiv{
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 3%;
+
+    background-color: transparent;
+    height:20vh;
+    width: 40vw;
+
+}
+
+#navBar{
+
+    background-color: rgba(0, 0, 0, 0.15);
+    
+    /*border-bottom: 1px solid;
+    margin-bottom: -1px;
+    border-color: white;*/
+}
+
+#parent{
+    position: absolute;
+    width: 65%;
+    height: 100%;
+    margin-top: 10%;
+    margin-left: 18%;
+}
+
+#questionBtn{
+
+    background: rgba(255, 255, 255,0);
+    border: none;
+    border:solid 2px white;
+    border-radius: 5px;
+    font-size: 1.5vw;
+    color:white;
+    padding: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    transition: background-color .5s;
+    
+}
+
+#questionBtn:hover {
+    background:rgba(255, 255, 255, 0.26);
+    color:white; 
+}
+
+#btnOutline{
+    margin: 5%;
+    border:none;
+    border-radius: 1pt;
+    box-shadow: 0 0 1pt #fff;
+    
+    outline:none;
+}
+
+#questionImg{
+    width: auto;
+    max-width: 200px;
+    max-height: 200px;
+    margin: 20%;
+    margin-left: 23%;
+    margin-top: 15%;
+    opacity: 0.4;
+}
+
+#headTxt{
+    color:azure;
+    font-weight: 700;
+}
+@media(max-width:900px){
+    #parent{
+        margin-left: 5%;
+        width:90%
+    }
+
+    #questionDiv{
+        width: 60vw;
+    }
+
+    #questionBtn{
+        
+        margin-top: 10%;
+        font-size:7vw
+    }
+}
+
+@media(min-width:900px) and (max-width:1700px){
+    #parent{
+        margin-left: 5%;
+        width:90%
+    }
+
+    #questionDiv{
+        width: 60vw;
+    }
+
+    #questionBtn{
+        font-size:2vw
+    }
+}
+
+@media (max-width:600px) {
+
+    #headTxt{
+        font-size: 10vw;
+    }
+
+    #descTxt{
+        font-size: 5vw;
+    }
+    
+}
+
+@media (min-width:600px) and (max-width:1500px){
+
+    #headTxt{
+        font-size: 6vw;
+    }
+
+    #descTxt{
+        font-size: 3vw;
+    }
+
+}
+
+@media (min-width:1500px){
+
+    #headTxt{
+        font-size: 5vw;
+    }
+
+    #descTxt{
+        font-size: 2vw
+    }
+    
+
+}
