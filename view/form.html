@@ -122,13 +122,14 @@
                 
               <!-- Nome -->
               <label for="nome" style="margin-top: 2%">Nome</label>
-              <input type="text" class="form-control" id="nome" placeholder="" style="margin-top: 1%;">
+              <input type="text" class="form-control" id="nome" placeholder="" style="margin-top: 1%;" maxlength="40">
               <br>
 
               <!-- RA -->
               <div class="form-group col-md-4">
                 <label for="RA">RA</label>
-                <input id="RA" type="number" class="form-control" aria-describedby="raHelp"style="margin-top: 1%;">            
+                <input id="RA" type="number" class="form-control" aria-describedby="raHelp"style="margin-top: 1%;" maxlength="6"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">            
               </div>
               <small id="raHelp" class="form-text text-muted" >
                   Precisamos do seu RA para acessar os seus exercícios já enviados e analizá-los caso seja necessário.
@@ -139,7 +140,7 @@
     
               <!-- CONTATO -->
               <label for="contato" style="margin-top: 2%">Contato</label>
-              <input type="text" class="form-control" id="contato" placeholder="Telefone ou Email" aria-describedby="contatoHelp"style="margin-top: 1%;">
+              <input type="text" class="form-control" id="contato" placeholder="Telefone ou Email" aria-describedby="contatoHelp"style="margin-top: 1%;" maxlength="40">
               <small id="contatoHelp" class="form-text text-muted" >
                   Caso seja necessário, entraremos em contato com você pelo meio informado.
               </small>
