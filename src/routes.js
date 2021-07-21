@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
 const dbmanager = require("./db_manager");
+const dotenv = require ('dotenv');
+const  request  = require('request');
+dotenv.config();
 
 const router = express.Router();
 
@@ -29,20 +32,47 @@ router.post('/getQuestion',function(req,res){
 })
 
 router.post('/post', function(req,res,next){
-    
-    var values = {
-        op: 1,
-        ra: req.body.ra,
-        nome: req.body.nome,
-        contato: req.body.contato,
-        duvida: req.body.duvida,
-        lista: req.body.lista,
-        ex: req.body.ex,
-        titulo: req.body.titulo,
-        res: res
+
+
+    //If the captcha is not done, return an error to the user
+    if(req.body.captcha === undefined || req.body.captcha === '' || req.body.captcha === null){
+        res.send({res:0,captcha:1});
+        return;
     }
 
-    dbmanager(values,returnProtocol);
+    const secretKey = process.env.CAPTCHA_KEY;
+
+    const verifyCaptcha = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}&remoteip=${req.connection.remoteAddress}`;
+
+    //Saves the current response
+    let resO = res;
+
+    //Sends a request to verify the captcha 
+    request(verifyCaptcha, (res,err,body,resOri = resO) => {
+        body = JSON.parse(body);
+
+        //If the captcha failed, return an error
+        if(body.success !== undefined && !body.success){
+            res.send({res:0,captcha:1});
+            return;
+        }else{
+            var values = {
+                op: 1,
+                ra: req.body.ra,
+                nome: req.body.nome,
+                contato: req.body.contato,
+                duvida: req.body.duvida,
+                lista: req.body.lista,
+                ex: req.body.ex,
+                titulo: req.body.titulo,
+                res: resOri
+            }
+        
+            dbmanager(values,returnProtocol);
+            
+        }
+    })
+    
     
 })
 

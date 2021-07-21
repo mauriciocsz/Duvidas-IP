@@ -59,6 +59,8 @@ function submitForm() {
         return
     }
 
+    const captcha = document.getElementById("g-recaptcha-response").value;
+
     let btn = document.getElementById("sendBtn");
 
     btn.innerHTML = "<i id='spinner' class='fa fa-refresh fa-spin' ></i>"
@@ -78,7 +80,8 @@ function submitForm() {
         contato: getElement("contato"),
         lista : getElement("Lista"),
         ex: getElement("Exercicios"),
-        duvida: getElement("duvida")
+        duvida: getElement("duvida"),
+        captcha: captcha
 
     });
 
@@ -107,7 +110,11 @@ function submitForm() {
             card.style.display = "none"
 
         }else{
-            alert("Um erro ocorreu! Tente novamente mais tarde")
+            //If captcha was the problem, inform the user of it
+            if(obj.captcha)
+                alert("Captcha inválido!")
+            else
+                alert("Um erro ocorreu! Tente novamente mais tarde")
             btn.innerHTML= "Enviar Questão"
         }
             
