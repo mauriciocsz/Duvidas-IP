@@ -1,15 +1,28 @@
 const socket = io();
 var formSubmitting = false;
 
+//Array containing all exercises count
+var arrayEx;
+
+const listas = document.getElementById("Lista");
+
 //Whenever on the initialization of the form, load all lists
 //and get the exercise amount of the first list
 socket.on("initialize",message => {
         loadCurrentLists(message.lists);
-        socket.emit("getEX",message.lists[0]);
+        socket.emit("getEX");
+
         socket.on("recieveEX", qntEX =>{
-            loadCurrentExercises(qntEX);
+            arrayEx = qntEX;
+            loadCurrentExercises(message.lists[0]);
         })
-    });
+
+    select.addEventListener('change', (event) => {
+        loadCurrentExercises(listas.value);
+    })
+
+
+});
 
 
 var select = document.getElementById("Lista");
@@ -27,9 +40,10 @@ function loadCurrentLists(lists){
 }
 
 //Define the amount of exercises that are on a certain list
-function loadCurrentExercises(exQnt){
+function loadCurrentExercises(lista){
+    $("#Exercicios").empty();
     select = document.getElementById("Exercicios");
-    for(var i=0;i<exQnt;i++){
+    for(var i=0;i<arrayEx[lista-1];i++){
         var opt = document.createElement('option');
         opt.value = i+1;
         opt.innerHTML = i+1;

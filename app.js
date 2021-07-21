@@ -20,14 +20,22 @@ app.use("/",express.static(__dirname+'/view'));
 http.listen(process.env.port || 3000);
 
 io.on('connection', socket => {
-    //While initializing the form, send the lists that are available 
-    //TODO: Retrieve those lists from the database
-     socket.emit("initialize",{lists:[1,2,3]});
+    //While initializing the form, send the lists that are available
+    query("select * from tb_listas WHERE ativa=true ORDER BY id ASC;").then(data => {
 
-    //Whenever requested, send the exercise amount of the current list
-    //TODO get the quantity of exercises from the database using lista's value
+        let lists = (data.rows).map(item => item.id)
+
+        socket.emit("initialize",{lists: lists});
+    })
+
+    //Send the exercise amount of all lists
     socket.on('getEX', list =>{
-         socket.emit('recieveEX',6);
+
+         query("SELECT ex FROM tb_listas ORDER BY id ASC").then( data =>{
+            let EXs = (data.rows).map(item => item.ex)
+            socket.emit('recieveEX',EXs);
+         })
+         
     })
  })
 
