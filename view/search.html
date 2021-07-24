@@ -3,16 +3,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="stylesheet" href="stylesheets/search.css">
+        <title>Buscar dúvida</title>
+        <link rel="icon" href="stylesheets/resources/coffee.png">
 
     </head>
 
     <body class="body">   
+
         <div style="width: 100%;height: 100%;">
-
-            <div style="width: 100%;height: 100%;position: absolute;" onclick="removeBox()">
-            </div>
-
-
+          <div style="width: 100%;height: 100%;position: absolute;" onclick="removeBox()">
+          </div>
+            
+          <div id="navBar"> </div>
 
           <div id="searchDiv" class="form-group">
 
@@ -29,12 +31,13 @@
 
             <div id="fileCard" class ="fileCard" style="display: none;">
                 <div id="cardSucesso" class="card" style="border: none;display: block;">
-                  <div class="card-header" style="width: 100%; height: auto; position: relative;margin-bottom: 3.5%;">
+                  <div class="card-header" style="width: 100%; height: 0; position: relative;margin-bottom: 3.5%;" onclick="removeBox()">
                     <div id="boxColor" class="card-header">
-                        
+                          
                         <span class="dot" style=" background-color: #DB4437;"></span> 
                         <span class="dot" style="background-color: #F4B400;"></span> 
                         <span class="dot" style="background-color: #0F9D58;"></span> 
+                        
                     </div>
         
                     <div class="boxTitleDiv">
@@ -62,9 +65,6 @@
                         Dúvida respondida por Michel
                       </label>
 
-                      <div style="margin:5%">
-
-                      </div>
                   </div> 
                 </div>
             </div>  
@@ -77,10 +77,19 @@
     </body>
 
     
+
+    
     <script>if ( window.history.replaceState ){ window.history.replaceState( null, null, window.location.href ); } </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./scripts/search.js"></script>
+
+    
+    <script>
+      $(function(){
+        $("#navBar").load("navBar.html");
+      });
+    </script>
 </html>

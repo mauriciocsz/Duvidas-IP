@@ -30,27 +30,32 @@ protocolInput.addEventListener("keyup", function(e){
     }
 })
 
-function loadBox(question){
 
+const card = document.getElementById("fileCard");
+const search = document.getElementById("searchDiv");
+const nav = document.getElementById("navBar");
 
-    document.getElementById("protocoloText").innerText = question.id;
-    document.getElementById("titulo").innerText = question.titulo;
-    document.getElementById("listaEx").innerText = "L"+(question.lista).padStart(2,'0')+"EX"+(question.ex).padStart(2,'0');
-    document.getElementById("nomeRA").innerText = question.nome +" ("+question.ra+")";
-    document.getElementById("duvida").innerText = question.duvida;
+//Loads the card with the question info
+function loadBox(qs){
 
-    if(question.monitor)
-        document.getElementById("monitor").innerText = "Dúvida respondida por " + question.monitor;
+    setText("protocoloText", qs.id);
+    setText("titulo", qs.titulo);
+    setText("listaEx", "L"+(qs.lista).padStart(2,'0')+"EX"+(qs.ex).padStart(2,'0'));
+    setText("nomeRA", qs.nome +" ("+qs.ra+")");
+    setText("duvida",qs.duvida);
+
+    if(qs.monitor)
+        setText("monitor", "Dúvida respondida por " + qs.monitor);
     else
         document.getElementById("monitor").innerText = "";
 
-    if(question.comentario)
-        document.getElementById("comentario").innerText = "Comentário: \n"+question.comentario;
+    if(qs.comentario)
+        setText("comentario","Comentário: \n"+qs.comentario);
     else
         document.getElementById("comentario").style.display = "none"
 
     let status = document.getElementById("status");
-    switch(question.status){
+    switch(qs.status){
         case 0:
             status.innerText = "Não respondida"
             status.style.color = "#DB4437"
@@ -63,26 +68,18 @@ function loadBox(question){
             status.style.display = "none"
     }
 
-    let card = document.getElementById("fileCard");
-    let search = document.getElementById("searchDiv");
-
-    search.style.animationPlayState = "running";
-    
-    search.style.animationFillMode = "forwards";
-
+    nav.style.opacity = '0';
+    search.style.opacity = '0';
     card.style.display = "block"
-    card.style.opacity = 1;
 }
 
+function setText(id, text){
+    document.getElementById(id).innerText = text;
+}
+
+//Removes the card with the question info
 function removeBox(){
-
-    let card = document.getElementById("fileCard");
-    let search = document.getElementById("searchDiv");
-
     card.style.display = "none"
-    card.style.opacity = '0'
-    search.style.animationPlayState = "paused";
-    search.style.animationFillMode = "none";
-    search.opacity = '1';
-
+    nav.style.opacity = '1';
+    search.style.opacity = '1';
 }

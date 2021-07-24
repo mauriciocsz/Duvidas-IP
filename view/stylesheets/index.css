@@ -12,15 +12,6 @@
 
 }
 
-#navBar{
-
-    background-color: rgba(0, 0, 0, 0.15);
-    
-    /*border-bottom: 1px solid;
-    margin-bottom: -1px;
-    border-color: white;*/
-}
-
 #parent{
     position: absolute;
     width: 65%;

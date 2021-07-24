@@ -72,7 +72,7 @@
 }
 
 .cardBody{
-    margin:5%; 
+    margin:5%;
     height: fit-content;
     display:initial;
 }
@@ -150,7 +150,7 @@
 }
 
 #card{
-    max-height:1200px; 
+    max-height:900px; 
     height:fit-content;
     width: 100%; 
     border: none;
@@ -215,7 +215,7 @@ input[type=number] {
 
 
     .fileCard{
-        margin-top: 2%;
+        margin-top: 0.5%;
         margin-left: auto;
         margin-right: auto;
         width: 65vw; 
@@ -226,7 +226,7 @@ input[type=number] {
 @media (min-width:1300px){
 
     .fileCard{
-        margin-top: 2%;
+        margin-top: 0.5%;
         margin-left: auto;
         margin-right: auto;
         width: 40vw; 

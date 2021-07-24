@@ -3,19 +3,29 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="stylesheet" href="stylesheets/form.css">
+        <title>Nova dúvida</title>
+        <link rel="icon" href="stylesheets/resources/coffee.png">
 
     </head>
 
     <body class="body"> 
 
+      <div id="navBar"></div>
+
       <div class ="fileCard">
         <div id="cardSucesso" class="card" style="border: none;display: none;">
           <div class="card-header" style="width: 100%; height: auto; position: relative;margin-bottom: 3.5%;">
-            <div id="boxColor" class="card-header"></div>
+            <div id="boxColor" class="card-header">
+                          
+              <span class="dot" style=" background-color: #DB4437;"></span> 
+              <span class="dot" style="background-color: #F4B400;"></span> 
+              <span class="dot" style="background-color: #0F9D58;"></span> 
+              
+          </div>
 
-            <div class="boxTitleDiv">
-              <label class="boxTitle" style=" color: white;">Protocolo</label>
-            </div>
+          <div class="boxTitleDiv">
+            <label id="protocoloText" class="boxTitle" style=" color: white;">Protocolo</label>
+          </div>
           </div>
 
           <div class="card-body" style="text-align: center;">
@@ -59,7 +69,7 @@
             </div>
           </div>
 
-          <div class="card-body" style="margin:5%;">
+          <div class="card-body" style="margin:5%; margin-bottom: 2.5%;">
 
             <div id="question" class="navigator">
               <div class="form-group" style="margin: 1%;">
@@ -109,7 +119,7 @@
               </div>
 
               <div class="row justify-content-center">
-                <div class="g-recaptcha" data-sitekey="6Lc3ta8bAAAAAKZcBEauY1pGrRQkF1FbEsXitMyz" style="margin: 2%"></div>
+                <div class="g-recaptcha" data-sitekey="6Lc3ta8bAAAAAKZcBEauY1pGrRQkF1FbEsXitMyz"></div>
                 <button id="sendBtn" type="submit" class="btn btn-primary" onclick="submitForm()">
                   Enviar Questão
                 </button>
@@ -171,6 +181,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src = "/socket.io/socket.io.js"></script>
         <script src="/scripts/form.js"></script>
+
+        <script>
+          $(function(){
+            $("#navBar").load("navBar.html");
+          });
+        </script>
     </body>
 
 </html>

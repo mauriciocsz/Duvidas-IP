@@ -60,11 +60,15 @@
     }
 }
 
-#searchDiv{
-    animation: fadeOut 1s;
-    animation-fill-mode: forwards;
-    animation-play-state: paused;
+@keyframes fadeIn {
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
+
 
 .fileCard{
     margin-top: 2%;
@@ -73,7 +77,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    opacity: 0;
+    opacity: 1;
     width: 40vw; 
     animation: boxAppear 1s;
     animation-fill-mode: forwards;
@@ -123,7 +127,14 @@
     right: 0;
     margin: auto;
     margin-top: 20%;
+
+    transition: opacity .35s;
     
+}
+
+#navBar{
+    opacity: 1;
+    transition: opacity .35s;
 }
 
 @media (max-width:900px){
@@ -157,7 +168,7 @@
 
 
     .fileCard{
-        margin-top: 2%;
+        margin-top: 1%;
         margin-left: auto;
         margin-right: auto;
         width: 65vw; 
@@ -168,7 +179,7 @@
 @media (min-width:1300px){
 
     .fileCard{
-        margin-top: 2%;
+        margin-top: 1%;
         margin-left: auto;
         margin-right: auto;
         width: 40vw; 
