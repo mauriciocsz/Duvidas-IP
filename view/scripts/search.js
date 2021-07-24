@@ -12,16 +12,7 @@ function getQuestion(){
 
         //Question was found
         if(obj.res){
-            let div = document.getElementById("question");
-
-            //This disgusting block is only temporary, It'll be 
-            //fixed whenever I do the website's appearence overhaul
-            createNode(div,obj.question.titulo)
-            createNode(div,obj.question.duvida)
-            createNode(div,obj.question.status)
-            createNode(div,obj.question.nome)
-            createNode(div,obj.question.ra)
-
+            loadBox(obj.question);
         //Question was not found
         }else
             alert("Questão não encontrada!");
@@ -29,11 +20,69 @@ function getQuestion(){
     }
 }
 
-function createNode(div, key){
 
-    let node = document.createTextNode(key+" ")
-    div.appendChild(node)
-    const lineBreak = document.createElement('br');
-    div.appendChild(lineBreak)
+//Gets question on Enter
+let protocolInput = document.getElementById("protocol")
+protocolInput.addEventListener("keyup", function(e){
+    if(e.keyCode== 13){
+        e.preventDefault();
+        getQuestion();
+    }
+})
+
+function loadBox(question){
+
+
+    document.getElementById("protocoloText").innerText = question.id;
+    document.getElementById("titulo").innerText = question.titulo;
+    document.getElementById("listaEx").innerText = "L"+(question.lista).padStart(2,'0')+"EX"+(question.ex).padStart(2,'0');
+    document.getElementById("nomeRA").innerText = question.nome +" ("+question.ra+")";
+    document.getElementById("duvida").innerText = question.duvida;
+
+    if(question.monitor)
+        document.getElementById("monitor").innerText = "Dúvida respondida por " + question.monitor;
+    else
+        document.getElementById("monitor").innerText = "";
+
+    if(question.comentario)
+        document.getElementById("comentario").innerText = "Comentário: \n"+question.comentario;
+    else
+        document.getElementById("comentario").style.display = "none"
+
+    let status = document.getElementById("status");
+    switch(question.status){
+        case 0:
+            status.innerText = "Não respondida"
+            status.style.color = "#DB4437"
+            break;
+        case 1:
+            status.innerText = "Respondida"
+            status.style.color = "#0F9D58"
+            break;
+        default:
+            status.style.display = "none"
+    }
+
+    let card = document.getElementById("fileCard");
+    let search = document.getElementById("searchDiv");
+
+    search.style.animationPlayState = "running";
+    
+    search.style.animationFillMode = "forwards";
+
+    card.style.display = "block"
+    card.style.opacity = 1;
+}
+
+function removeBox(){
+
+    let card = document.getElementById("fileCard");
+    let search = document.getElementById("searchDiv");
+
+    card.style.display = "none"
+    card.style.opacity = '0'
+    search.style.animationPlayState = "paused";
+    search.style.animationFillMode = "none";
+    search.opacity = '1';
 
 }

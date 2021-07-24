@@ -2,20 +2,85 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/search.css">
 
     </head>
 
-    <body style="background-color: #fff;">   
-        <input id="protocol" type="text" name="protocol" placeholder="IP-xxxx-0000"> 
-        <input type="button" name="submit" value="Submit" onclick="getQuestion()">
+    <body class="body">   
+        <div style="width: 100%;height: 100%;">
 
-        <div id="question">
+            <div style="width: 100%;height: 100%;position: absolute;" onclick="removeBox()">
+            </div>
+
+
+
+          <div id="searchDiv" class="form-group">
+
+              <div id="flexDiv" style="display: inline-flex;">
+
+                
+                <input id="protocol" type="text" class="form-control shadow-none" id="protocol" placeholder="IP-xxxx-0000" maxlength="12">
+
+                <button id="send" type="button" class="btn btn-primary" onclick="getQuestion()">
+                    <i class="fa fa-search"></i>
+                  </button>
+              </div>
+            </div>
+
+            <div id="fileCard" class ="fileCard" style="display: none;">
+                <div id="cardSucesso" class="card" style="border: none;display: block;">
+                  <div class="card-header" style="width: 100%; height: auto; position: relative;margin-bottom: 3.5%;">
+                    <div id="boxColor" class="card-header">
+                        
+                        <span class="dot" style=" background-color: #DB4437;"></span> 
+                        <span class="dot" style="background-color: #F4B400;"></span> 
+                        <span class="dot" style="background-color: #0F9D58;"></span> 
+                    </div>
+        
+                    <div class="boxTitleDiv">
+                      <label id="protocoloText" class="boxTitle" style=" color: white;">Protocolo</label>
+                    </div>
+    
+                    <div class="boxTitleDiv" style="text-align: right;left:-20">
+                        <label id="status" class="boxTitle" style=" color: red;">Não respondida</label>
+                      </div>
+                  </div>
+        
+                  <div class="card-body" style="text-align: center;">
+                    <h5 id="listaEx" >L06EX01</h5>
+                    <h3 id="titulo" >Título da Persgunta</h3>
+        
+                    <label id="nomeRA" style="color:#6d757d;display: block;">
+                      Nome da pessoa que perguntou (792208)
+                    </label>
+                    
+                    <textarea class="form-control" id="duvida" rows="20" style="background-color: white;resize: none;margin:2%;margin-left: 0;" aria-describedby="duvidaHelp" readonly></textarea>
+    
+                    <textarea class="form-control" id="comentario" rows="2" style="color: white;background-color: rgb(31, 136, 31);resize: none;margin:2%;margin-left: 0;" aria-describedby="duvidaHelp" readonly>Comentário: Ah então mauricio você é apenas burro</textarea>
+                    
+                    <label id="monitor" style="color:#6d757d;display: block;">
+                        Dúvida respondida por Michel
+                      </label>
+
+                      <div style="margin:5%">
+
+                      </div>
+                  </div> 
+                </div>
+            </div>  
             
+            
+            <div id="question">
+            
+            </div>
         </div>
     </body>
 
+    
+    <script>if ( window.history.replaceState ){ window.history.replaceState( null, null, window.location.href ); } </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src = "/socket.io/socket.io.js"></script>
     <script src="./scripts/search.js"></script>
 </html>

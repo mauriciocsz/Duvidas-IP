@@ -1,0 +1,177 @@
+.body{
+    background: no-repeat center top fixed;
+    background-color: #5e666d;
+    background-image:url(/stylesheets/resources/bg-4.jpg);
+    background-position: center;
+    background-size:cover;
+}
+
+.fileCard{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100vw; 
+}
+
+#protocol{
+    height: 10vh;
+    font-size: 4vh;
+    text-align: center;
+    width: 40vw;
+    background-color: black;
+    border:none;
+    color:white;
+    border-radius: 0.5em  0 0 0.5em !important;
+    padding-left: 10%;
+    
+    
+}
+
+#send{
+    width: 4vw;
+    background-color: black;
+    border:none;
+    border-radius: 0 1em 1em 0 !important;
+}
+
+
+#boxColor{
+    background-color: #1e1e1e;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 45px;
+}
+
+@keyframes boxAppear{
+
+    0% { transform: scale(.001);}
+    50% { transform: scale(.002);}
+    100% { transform: scale(1);}
+    
+}
+
+@keyframes fadeOut {
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+#searchDiv{
+    animation: fadeOut 1s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+.fileCard{
+    margin-top: 2%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    width: 40vw; 
+    animation: boxAppear 1s;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+.dot{
+    height: 25px;
+    width: 25px;
+    background-color: #DB4437;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.boxTitleDiv{
+    display: inline-block;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    border: none;
+    margin-top: 2%;
+}
+
+#protocolText{
+    padding: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+#protocolOutline{
+    margin: 5%;
+    border:none;
+    border-radius: 2pt;
+    box-shadow: 0 0 1pt #6d757d;
+    outline:none;
+}
+
+#searchDiv{
+    
+    position: absolute;
+    width: fit-content;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 20%;
+    
+}
+
+@media (max-width:900px){
+
+    #protocol{
+        width: 100%;
+    }
+
+    #send{
+        width:30%;
+    }
+
+    #inlineDiv{
+        width: 100%;
+    }
+
+    #protocoloText{
+        display: none;
+    }
+
+    .fileCard{
+        margin-top: 0%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100vw; 
+    }
+
+}
+
+@media (min-width:900px) and (max-width: 1300px){
+
+
+    .fileCard{
+        margin-top: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 65vw; 
+    }
+    
+}
+
+@media (min-width:1300px){
+
+    .fileCard{
+        margin-top: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40vw; 
+    }
+
+}
