@@ -12,6 +12,14 @@
 
 }
 
+.body{
+    background: no-repeat center top fixed;
+    background-color: #5e666d;
+    background-image:url(/stylesheets/resources/notebook-4.png);
+    background-position: center;
+    background-size:cover;
+}
+
 #parent{
     position: absolute;
     width: 65%;

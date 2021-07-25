@@ -49,10 +49,12 @@ function loadBox(qs){
     else
         document.getElementById("monitor").innerText = "";
 
-    if(qs.comentario)
+    if(qs.comentario){
+        document.getElementById("comentario").style.opacity = "1"
         setText("comentario","Comentário: \n"+qs.comentario);
+    }
     else
-        document.getElementById("comentario").style.display = "none"
+        document.getElementById("comentario").style.opacity = "0"
 
     let status = document.getElementById("status");
     switch(qs.status){

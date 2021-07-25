@@ -17,6 +17,18 @@ app.use(express.urlencoded({
 app.use(require("./src/routes"));
 app.use("/",express.static(__dirname+'/view'));
 
+
+app.use(function(req,res,next){
+    res.status(404);
+
+    res.format({
+        html: function(){
+            res.sendFile(__dirname+'/view/404.html')
+        }
+    })
+
+});
+
 http.listen(process.env.port || 3000);
 
 io.on('connection', socket => {

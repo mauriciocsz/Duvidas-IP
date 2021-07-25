@@ -15,6 +15,10 @@ router.get('/perguntar', function(req,res){
     res.sendFile(path.resolve(__dirname+'/../view/form.html'))
 })
 
+router.get('404', function(req,res){
+    res.sendFile(path.resolve(__dirname+'/../view/404.html'))
+})
+
 router.get('/search', function(req,res){
     res.sendFile(path.resolve(__dirname+'/../view/search.html'))
 })

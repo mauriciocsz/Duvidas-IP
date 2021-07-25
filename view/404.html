@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    </head>
+
+    <body style="background-color: #0078d7; font-family: 'Roboto', sans-serif;">
+        <div style=" margin-left: 5%;color: white; margin-top: 5%; margin-right: 30%;">
+            <h1 style=" font-size: 25vh; margin-bottom: 2%;"> :(</h1>
+            <label style="font-size: 4vh">
+                Seu sistema acessou uma página inexistente, e precisa reiniciar. Estamos coletando alguns dados, e então reiniciaremos para você.
+            </label>
+
+            <label id="numContador" style="margin-top: 8%;font-size: 4vh; display: block;">
+                0% Completo
+            </label>
+
+            
+            <label style="margin-top: 4%;font-size: 2vh; display: block;">
+                ERRO: 404
+            </label>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        
+        <script>
+            function animateValue(id, start, end, duration) {
+                if (start === end) return;
+                var range = end - start;
+                var current = start;
+                var increment = end > start? 1 : -1;
+                var stepTime = Math.abs(Math.floor(duration / range));
+                var obj = document.getElementById(id);
+                var timer = setInterval(function() {
+                    current += increment;
+                    obj.innerHTML = current + '% Completo';
+                    if (current == end) {
+                        clearInterval(timer);
+                    }
+                }, stepTime);
+            }
+
+            $(document).ready(function(){
+                animateValue("numContador", 0, 100, 10000);
+                setTimeout(function(){
+                    window.location.href = '/';
+                }, 10000);
+            });
+        </script>
+    </body>
+
+</html>
