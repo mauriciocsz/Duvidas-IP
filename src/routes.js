@@ -84,6 +84,12 @@ router.post('/success',function(req,res,next){
     res.sendFile(path.resolve( __dirname+'/../view/success.html'));
 })
 
+router.post('/getEXList',function(req,res,next){
+
+    dbmanager({op: 4, res: res},returnListsEx);
+
+})
+
 //Callback function called after the INSERT of a question is done
 function returnProtocol(res, protocol){
     //If the protocol returned was -1 it means that the submitting has failed
@@ -94,7 +100,7 @@ function returnProtocol(res, protocol){
         res.send({res: 1, protocol: protocol })
 }
 
-//Callback function called when the question's SEARCCH is done
+//Callback function called when the question's SEARCH is done
 function returnQuestion(res,question){
     //If we have recieved a question then send it back
     if(question && question!=-1){
@@ -102,6 +108,14 @@ function returnQuestion(res,question){
     }else
         res.send({res: 0})
     
+}
+
+//Callback function called after we retrive all lists and exercises from the DB
+function returnListsEx(res,listsEx){
+    if(listsEx && listsEx!=-1){
+        res.send({res:1, listsEx: listsEx});
+    }else
+        res.send({res:0})
 }
 
 module.exports = router;

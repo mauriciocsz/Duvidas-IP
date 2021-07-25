@@ -33,10 +33,27 @@ function retrieveQuestionData(values = {}, callback){
     })
 }
 
+function retrievetListEx(values = {},callback){
+
+    query("select * from tb_listas WHERE ativa=true ORDER BY id ASC;").then(data => {
+        if(data==-1){
+            callback(values.res, -1);
+        }else{
+            let listsEx = {
+                lists: (data.rows).map(item => item.id),
+                EXs: (data.rows).map(item => item.ex)
+            }
+
+            callback(values.res, listsEx);
+        } 
+    })
+}
+
 //Function responsible for deciding which operation will take place
 // 1 = insert Question;
 // 2 = retrieve questions based on RA
 // 3 = retrieve question data based on the protocol
+// 4 = retrieve the lists and question quantity of each
 module.exports =  function opManager(values = {}, callback){
     switch(values.op){
         case 1:
@@ -55,6 +72,8 @@ module.exports =  function opManager(values = {}, callback){
             else
                 return -1;
             break;
+        case 4:
+            retrievetListEx(values,callback);
         default:
             return;
     }
