@@ -4,12 +4,10 @@ dotenv.config();
 
 //DB authentication
 var pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_DATABASE,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-    ssl:true
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 //Query function it recieves a 'query' and the 'values' that go into it, this
