@@ -26,6 +26,6 @@ app.use(function(req,res,next){
 
 });
 
-http.listen(process.env.port || 3000);
+http.listen(process.env.PORT || 3000);
 
 console.log("Running");
