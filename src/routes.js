@@ -25,18 +25,51 @@ router.get('/search', function(req,res){
 
 router.post('/getQuestion',function(req,res){
 
-    var values = {
-        op:3,
-        protocol: req.body.protocol,
-        res: res
+    //If the captcha is not done, return an error to the user
+    if(req.body.captcha === undefined || req.body.captcha === '' || req.body.captcha === null){
+        res.send({res:0,captcha:1});
+        return;
     }
+    
+    const secretKey = process.env.CAPTCHA_V3_KEY;
+    
+    const verifyCaptcha = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}&remoteip=${req.connection.remoteAddress}`;
+    
+    //Saves the current response
+    let resO = res;
 
-    dbmanager(values,returnQuestion);
+    //Sends a request to verify the captcha 
+    request(verifyCaptcha, (res,err,body,resOri = resO) => {
+        body = JSON.parse(body);
+
+        //If the captcha failed, return an error
+        if(body.success !== undefined && !body.success){
+            resOri.send({res:0,captcha:1});
+            return;
+        }else{
+            var values = {
+                op:3,
+                protocol: req.body.protocol,
+                res: resOri
+            }
+        
+            dbmanager(values,returnQuestion);
+            
+        }
+    })
     
 })
 
 router.post('/post', function(req,res,next){
 
+    let keyValores = ['ra','nome','contato','duvida','lista','ex'];
+
+    for(let x=0;x<keyValores.length;x++){
+        if(req.body[keyValores[x]] === null || req.body[keyValores[x]] === undefined || req.body[keyValores[x]].length>10000){
+            res.send({res:0});
+            return;
+        }
+    }
 
     //If the captcha is not done, return an error to the user
     if(req.body.captcha === undefined || req.body.captcha === '' || req.body.captcha === null){
@@ -44,7 +77,7 @@ router.post('/post', function(req,res,next){
         return;
     }
 
-    const secretKey = process.env.CAPTCHA_KEY;
+    const secretKey = process.env.CAPTCHA_V3_KEY;
 
     const verifyCaptcha = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.captcha}&remoteip=${req.connection.remoteAddress}`;
 

@@ -58,16 +58,22 @@ function loadCurrentExercises(lista){
 //POSTS the question using XMLHttpRequest
 function submitForm() {
 
+    document.getElementById("sendBtn").innerHTML = "<i id='spinner' class='fa fa-refresh fa-spin' ></i>"
+
     fields = ["nome","contato","RA","Lista","Exercicios","duvida"]
     if(!checkFields(fields)){
         return
     }
 
-    const captcha = document.getElementById("g-recaptcha-response").value;
+    grecaptcha.ready(function(){
+        grecaptcha.execute('6LciAcEbAAAAAGU4y3suBMuJlNDwbLIChEsnlYKb', {action: 'submit'}).then(function(token){
+            sendValues(token)
+        })
+    })
 
-    let btn = document.getElementById("sendBtn");
+}
 
-    btn.innerHTML = "<i id='spinner' class='fa fa-refresh fa-spin' ></i>"
+function sendValues(token){
 
     let card = document.getElementById("card");
     let cardSucesso = document.getElementById("cardSucesso");
@@ -85,7 +91,7 @@ function submitForm() {
         lista : $('#Lista').find(":selected").text(),
         ex: getElement("Exercicios"),
         duvida: getElement("duvida"),
-        captcha: captcha
+        captcha: token
 
     });
 
@@ -119,10 +125,11 @@ function submitForm() {
                 alert("Captcha inválido!")
             else
                 alert("Um erro ocorreu! Tente novamente mais tarde")
-            btn.innerHTML= "Enviar Questão"
+            document.getElementById("sendBtn").innerHTML= "Enviar Questão"
         }
             
     }
+
 }
 
 //Returns the value of an element 

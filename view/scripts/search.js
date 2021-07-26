@@ -1,10 +1,28 @@
-function getQuestion(){
+function checkValues(){
+
+    let  regex = /[a-zA-Z]{2}\-[a-zA-Z]{4}\-\d{4}?$/;
+
+    let  protocol = document.getElementById("protocol").value;
+
+     if(!regex.test(protocol)){
+         alert("Protocolo inválido!")
+         return 0;
+     }
+
+    grecaptcha.ready(function(){
+        grecaptcha.execute('6LciAcEbAAAAAGU4y3suBMuJlNDwbLIChEsnlYKb', {action: 'submit'}).then(function(token){
+            sendQuestion(protocol,token)
+        })
+    })
+}
+
+function sendQuestion(protocol, token){
 
     let http = new XMLHttpRequest();
     http.open("POST", "/getQuestion", true);
 
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    http.send('protocol='+document.getElementById("protocol").value);
+    http.send('protocol='+protocol+"&captcha="+token);
 
     http.onload = function() {
         //Parses the response
@@ -26,7 +44,7 @@ let protocolInput = document.getElementById("protocol")
 protocolInput.addEventListener("keyup", function(e){
     if(e.keyCode== 13){
         e.preventDefault();
-        getQuestion();
+        checkValues();
     }
 })
 
