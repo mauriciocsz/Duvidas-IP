@@ -1,4 +1,4 @@
-var formSubmitting = false;
+var formSubmitting = true;
 
 //Array containing all exercises count
 var arrayEx;
@@ -78,57 +78,45 @@ function sendValues(token){
     let card = document.getElementById("card");
     let cardSucesso = document.getElementById("cardSucesso");
 
-
-    var http = new XMLHttpRequest();
-    http.open("POST", "/post", true);
-
-    //Gets all inputs into an object
-    var params = JSON.stringify(
-        {ra: getElement("RA"),
-        nome: getElement("nome"),
-        titulo: getElement("titulo"),
-        contato: getElement("contato"),
-        lista : $('#Lista').find(":selected").text(),
-        ex: getElement("Exercicios"),
-        duvida: getElement("duvida"),
-        captcha: token
-
-    });
-
-
-    http.setRequestHeader("Content-type", "application/json; charset=utf-8");
-    http.setRequestHeader("Content-length", params.length);
-    http.setRequestHeader("Connection", "close");
-    http.send(params)
+    $.ajax({
+        url:"/post",
+        dataType:"json",
+        type:"post",
+        data:{
+            ra: getElement("RA"),
+            nome: getElement("nome"),
+            titulo: getElement("titulo"),
+            contato: getElement("contato"),
+            lista : $('#Lista').find(":selected").text(),
+            ex: getElement("Exercicios"),
+            duvida: getElement("duvida"),
+            captcha: token
+        },
+        success:function(result){
+            if(result.res){
+                document.getElementById("protocolText").innerHTML = result.protocol;
+                formSubmitting = true
     
-    //Gets notified as soon as the transaction is successfully completed
-    http.onload = function() {
-
-        //Parses the response
-        var obj = JSON.parse(http.responseText)
-
-        //If the operation was successful redirect to the sucess page
-        if(obj.res){
-            document.getElementById("protocolText").innerHTML = obj.protocol;
-            formSubmitting = true
-
-            card.style.animation = "boxDisappear 1s"
-            card.style.animationFillMode = "forwards"
-            card.style.animationPlayState= "running"
-
-            cardSucesso.style.display = "block"
-            card.style.display = "none"
-
-        }else{
-            //If captcha was the problem, inform the user of it
-            if(obj.captcha)
-                alert("Captcha inválido!")
-            else
-                alert("Um erro ocorreu! Tente novamente mais tarde")
+                card.style.animation = "boxDisappear 1s"
+                card.style.animationFillMode = "forwards"
+                card.style.animationPlayState= "running"
+    
+                cardSucesso.style.display = "block"
+                card.style.display = "none"
+    
+            }else{
+                //If captcha was the problem, inform the user of it
+                if(result.captcha)
+                    alert("Não foi possível verificar o Captcha! Tente novamente mais tarde.")
+                else
+                    alert("Um erro ocorreu! Tente novamente mais tarde.")
+                document.getElementById("sendBtn").innerHTML= "Enviar Questão"
+            }
+        },
+        complete:function(result){
             document.getElementById("sendBtn").innerHTML= "Enviar Questão"
         }
-            
-    }
+    })
 
 }
 
@@ -156,9 +144,10 @@ function checkFields(fields){
 
 }
 
-
 //Loads next form page
 function loadNextPage(){
+
+    formSubmitting = false;
 
     fields = ["nome","contato","RA"]
     if(checkFields(fields)){

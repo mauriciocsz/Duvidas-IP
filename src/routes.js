@@ -112,11 +112,6 @@ router.post('/post', function(req,res,next){
     
     
 })
-
-router.post('/success',function(req,res,next){
-    res.sendFile(path.resolve( __dirname+'/../view/success.html'));
-})
-
 router.post('/getEXList',function(req,res,next){
 
     dbmanager({op: 4, res: res},returnListsEx);

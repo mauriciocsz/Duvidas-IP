@@ -18,24 +18,23 @@ function checkValues(){
 
 function sendQuestion(protocol, token){
 
-    let http = new XMLHttpRequest();
-    http.open("POST", "/getQuestion", true);
-
-    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    http.send('protocol='+protocol+"&captcha="+token);
-
-    http.onload = function() {
-        //Parses the response
-        let obj = JSON.parse(http.responseText)
-
-        //Question was found
-        if(obj.res){
-            loadBox(obj.question);
-        //Question was not found
-        }else
-            alert("Questão não encontrada!");
-
-    }
+    $.ajax({
+        url:"/getQuestion",
+        dataType:"json",
+        type:"post",
+        data:{
+            protocol:protocol,
+            captcha:token
+        },
+        success:function(result){
+            //Question was found
+            if(result.res)
+                loadBox(result.question);
+            //Question was not found
+            else
+                alert("Questão não encontrada!");
+        }
+    })
 }
 
 
