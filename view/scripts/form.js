@@ -10,6 +10,10 @@ loadLists();
 var select = document.getElementById("Lista");
 var choiceSelected = select.value;
 
+//If there's info from the previous question saved in cache, load it into the form
+let info = ["nome","RA","contato"];
+info.forEach(loadStoredInfo);
+
 //Gets all active lists from the database 
 function loadLists(){
     $.ajax({
@@ -151,6 +155,10 @@ function loadNextPage(){
 
     fields = ["nome","contato","RA"]
     if(checkFields(fields)){
+        localStorage.setItem("nome", document.getElementById("nome").value);
+        localStorage.setItem("contato", document.getElementById("contato").value);
+        localStorage.setItem("RA", document.getElementById("RA").value);
+
         let info = document.getElementById("info")
         let duvida = document.getElementById("question");
         let card = document.getElementById("card");
@@ -165,6 +173,13 @@ function loadNextPage(){
         
     }
     
+}
+
+//Loads stored info and puts them as input in the form
+function loadStoredInfo(item){
+    let current = localStorage.getItem(item);
+    if(current!=null)
+        document.getElementById(item).value = current;
 }
 
 // Gets a warning before exiting the form

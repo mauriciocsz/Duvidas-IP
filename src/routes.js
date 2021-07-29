@@ -25,6 +25,15 @@ router.get('/search', function(req,res){
 
 router.post('/getQuestion',function(req,res){
 
+    let  regex = /[a-zA-Z]{2}\-[a-zA-Z]{4}\-\d{4}?$/;
+
+    let  protocol = req.body.protocol;
+
+     if(!regex.test(protocol)){
+        res.send({res:0});
+        return;
+     }
+
     //If the captcha is not done, return an error to the user
     if(req.body.captcha === undefined || req.body.captcha === '' || req.body.captcha === null){
         res.send({res:0,captcha:1});
@@ -63,12 +72,18 @@ router.post('/getQuestion',function(req,res){
 router.post('/post', function(req,res,next){
 
     let keyValores = ['ra','nome','contato','duvida','lista','ex'];
+    let maxSize = [6,40,40,6000,2,2]
 
     for(let x=0;x<keyValores.length;x++){
-        if(req.body[keyValores[x]] === null || req.body[keyValores[x]] === undefined || req.body[keyValores[x]].length>10000){
+        if(req.body[keyValores[x]] === null || req.body[keyValores[x]] === undefined || req.body[keyValores[x]].length>maxSize[x]){
             res.send({res:0});
             return;
         }
+    }
+
+    if(req.body["titulo"].length>40){
+        res.send({res:0});
+        return;
     }
 
     //If the captcha is not done, return an error to the user
