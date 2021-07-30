@@ -148,6 +148,38 @@ function checkFields(fields){
 
 }
 
+function loadPreviousPage(){
+
+    let left = document.getElementById("left");
+    let right = document.getElementById("right");
+
+    right.style.opacity = "1";
+    right.style.cursor = "pointer";
+    left.style.opacity = "0.25";
+    
+    right.onclick = loadNextPage;
+    left.onclick = "";
+    
+    left.style.cursor = "none";
+
+    let info = document.getElementById("info")
+    let duvida = document.getElementById("question");
+    let card = document.getElementById("card");
+
+    card.style.animation = "getSmaller 1s"
+    card.style.animationPlayState = "running"
+    card.style.height = card.offsetHeight
+    card.style.animationFillMode = "forwards"
+
+    setTimeout(() => {
+        card.style.height = "fit-content"
+    }, 1000);
+
+    info.style.display = "block"
+    duvida.style.display = "none"
+}
+
+
 //Loads next form page
 function loadNextPage(){
 
@@ -162,11 +194,21 @@ function loadNextPage(){
         let info = document.getElementById("info")
         let duvida = document.getElementById("question");
         let card = document.getElementById("card");
+        card.style.height = "fit-content";
 
         card.style.animation = "getBigger 1s"
         
+        let left = document.getElementById("left");
+        let right = document.getElementById("right");
+
+        left.onclick = loadPreviousPage;
+        right.onclick = "";
+        left.style.opacity = "1";
+        left.style.cursor = "pointer";
+        right.style.opacity = "0.25";
 
         card.style.animationPlayState= "running"
+        card.style.animationFillMode = "forwards"
 
         duvida.style.display = "block"
         info.style.display = "none"
