@@ -154,13 +154,14 @@ function loadPreviousPage(){
     let right = document.getElementById("right");
 
     right.style.opacity = "1";
-    right.style.cursor = "pointer";
     left.style.opacity = "0.25";
     
     right.onclick = loadNextPage;
     left.onclick = "";
     
     left.style.cursor = "none";
+    right.style.cursor = "pointer";
+    
 
     let info = document.getElementById("info")
     let duvida = document.getElementById("question");
@@ -203,9 +204,12 @@ function loadNextPage(){
 
         left.onclick = loadPreviousPage;
         right.onclick = "";
+        
         left.style.opacity = "1";
-        left.style.cursor = "pointer";
         right.style.opacity = "0.25";
+
+        left.style.cursor = "pointer";
+        right.style.cursor = "none";
 
         card.style.animationPlayState= "running"
         card.style.animationFillMode = "forwards"
