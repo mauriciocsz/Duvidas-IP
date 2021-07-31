@@ -80,15 +80,16 @@
             <div id="question" class="navigator">
 
                <div class="form-group" style="margin: 1%;">
-                <h5 class="card-title">Dúvida</h5>
+                <h4 id="switchDuvida" class="card-title, switches" style="display: inline; cursor: default;" onclick="switchQuestionType(this.id)">Dúvida </h4>
+                <h4 id="switchTutoria" class="card-title, switches" style="display: inline;opacity: .40;/* float: right; */ cursor: pointer;" onclick="switchQuestionType(this.id)">Tutoria </h4>
                 <br>
-                <div class="row g-3">
+                <div class="row g-3" style="margin-top: 0.5rem;">
                   <!-- Título -->
                   <div class="col-sm-9" id="divTitulo">
                     <label for="titulo">Título</label>
                     <input type="text" class="form-control" id="titulo" placeholder="" aria-describedby="tituloHelp" maxlength="60">
                     <small id="tituloHelp" class="form-text text-muted" >
-                      Tente explicar a dúvida de maneira breve
+                      Tente explicar a situação de maneira breve
                     </small>
                   </div>
 
@@ -112,7 +113,7 @@
 
                 <div class="form-group">
 
-                  <label for="duvida">Dúvida</label>
+                  <label for="duvida">Descrição</label>
                   <textarea class="form-control" id="duvida" rows="10" style="resize: none;" placeholder="Qual é o problema?" aria-describedby="duvidaHelp" maxlength="6000"></textarea>
                   <small id="duvidaHelp" class="form-text text-muted" >
                       Tente informar o máximo de detalhes possíveis, assim podemos ter uma boa ideia da situação. Não envie o código inteiro neste campo, o mesmo será analisado posteriormente.
@@ -135,7 +136,7 @@
               
             <div id="info" style="display: block;" class="navigator">
             <div class="form-group" style="margin: 0%;">
-              <h5 class="card-title">Informações</h5>
+              <h4 class="card-title">Informações</h4>
                 
               <!-- Nome -->
               <label for="nome" style="margin-top: 2%">Nome</label>

@@ -59,15 +59,15 @@ function loadCurrentExercises(lista){
     }
 }
 
-//POSTS the question using XMLHttpRequest
+//Prepares to submit the form, checking all fields and validating the captcha
 function submitForm() {
-
-    document.getElementById("sendBtn").innerHTML = "<i id='spinner' class='fa fa-refresh fa-spin' ></i>"
 
     fields = ["nome","contato","RA","Lista","Exercicios","duvida"]
     if(!checkFields(fields)){
         return
     }
+    
+    document.getElementById("sendBtn").innerHTML = "<i id='spinner' class='fa fa-refresh fa-spin' ></i>"
 
     grecaptcha.ready(function(){
         grecaptcha.execute('6LciAcEbAAAAAGU4y3suBMuJlNDwbLIChEsnlYKb', {action: 'submit'}).then(function(token){
@@ -77,6 +77,7 @@ function submitForm() {
 
 }
 
+// POSTS the form using AJAX
 function sendValues(token){
 
     let card = document.getElementById("card");
@@ -148,6 +149,7 @@ function checkFields(fields){
 
 }
 
+//Loads the previous form page
 function loadPreviousPage(){
 
     let left = document.getElementById("left");
@@ -159,12 +161,9 @@ function loadPreviousPage(){
     right.onclick = loadNextPage;
     left.onclick = "";
     
-    left.style.cursor = "none";
+    left.style.cursor = "default";
     right.style.cursor = "pointer";
     
-
-    let info = document.getElementById("info")
-    let duvida = document.getElementById("question");
     let card = document.getElementById("card");
 
     card.style.animation = "getSmaller 1s"
@@ -176,10 +175,10 @@ function loadPreviousPage(){
         card.style.height = "fit-content"
     }, 1000);
 
-    info.style.display = "block"
-    duvida.style.display = "none"
-}
+    $("#question").css("display","none")
+    $("#info").fadeIn(200);
 
+}
 
 //Loads next form page
 function loadNextPage(){
@@ -192,8 +191,6 @@ function loadNextPage(){
         localStorage.setItem("contato", document.getElementById("contato").value);
         localStorage.setItem("RA", document.getElementById("RA").value);
 
-        let info = document.getElementById("info")
-        let duvida = document.getElementById("question");
         let card = document.getElementById("card");
         card.style.height = "fit-content";
 
@@ -204,18 +201,18 @@ function loadNextPage(){
 
         left.onclick = loadPreviousPage;
         right.onclick = "";
-        
+
         left.style.opacity = "1";
         right.style.opacity = "0.25";
 
         left.style.cursor = "pointer";
-        right.style.cursor = "none";
+        right.style.cursor = "default";
 
         card.style.animationPlayState= "running"
         card.style.animationFillMode = "forwards"
 
-        duvida.style.display = "block"
-        info.style.display = "none"
+        $("#info").css("display","none")
+        $("#question").fadeIn(400);
         
     }
     
@@ -252,4 +249,33 @@ function copyProtocol(){
     area.select();
 
     document.execCommand('copy');
+}
+
+//Switches the question type from Dúvida to Tutoria and vice-versa
+function switchQuestionType(id){
+
+    $(".switches").fadeTo(100,"0.4");
+    $(".switches").attr("onclick","switchQuestionType(this.id)");
+    $(".switches").css("cursor","pointer");
+
+    $("#"+id).attr("onclick","");
+    $("#"+id).fadeTo(100,"1");
+    $("#"+id).css("cursor","default");
+    if(id=="switchDuvida"){
+        $(".col-sm-2").fadeIn(200)
+        $("#Lista option[value=-1]").remove();
+        $("#Exercicios option[value=-1]").remove();
+        loadCurrentExercises(0);
+    }
+    else{
+        $("#switchDuvida").attr("onclick","");
+        $(".col-sm-2").fadeOut(200, function(){
+            $("#Lista").append('<option value=-1>-1</option>')
+            $("#Lista").val(-1).change();
+            $("#Exercicios").append('<option value=-1>-1</option>')
+            $("#Exercicios").val(-1).change();
+            $("#switchDuvida").attr("onclick","switchQuestionType(this.id)");
+        })
+    }
+
 }

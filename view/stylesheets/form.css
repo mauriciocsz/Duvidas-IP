@@ -4,6 +4,7 @@
     background-image:url(/stylesheets/resources/bg-4.jpg);
     background-position: center;
     background-size:cover;
+    overflow: hidden;
 }
 
 #protocolText{
@@ -86,7 +87,7 @@
 }
 
 #info{
-    margin-top: 5%;
+    margin-top: 0%;
     opacity: 0;
     animation: fadeIn 1.0s;
     overflow: hidden;
@@ -130,7 +131,7 @@
         max-height: 800px;
     }
     100%{
-        max-height: 560px;
+        max-height: 530px;
     }
     
 }

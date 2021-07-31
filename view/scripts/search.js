@@ -57,7 +57,10 @@ function loadBox(qs){
 
     setText("protocoloText", qs.id);
     setText("titulo", qs.titulo);
-    setText("listaEx", "L"+(qs.lista).padStart(2,'0')+"EX"+(qs.ex).padStart(2,'0'));
+    if(qs.lista==-1 && qs.ex == -1)
+        setText("listaEx","Tutoria")
+    else
+        setText("listaEx", "L"+(qs.lista).padStart(2,'0')+"EX"+(qs.ex).padStart(2,'0'));
     setText("nomeRA", qs.nome +" ("+qs.ra+")");
     setText("duvida",qs.duvida);
 
