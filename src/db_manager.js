@@ -4,8 +4,8 @@ const query = require("./db_query");
 function insertQuestion(values = {},callback){
     const idgen = require("./id_generator");
     var id = idgen({prefix:"IP"});
-    query("INSERT INTO tb_duvidas (id,ra,nome,contato,duvida,lista,ex,status,titulo) values ($1,$2,$3,$4,$5,$6,$7,$8,$9);",
-    [id,values.ra,values.nome,values.contato,values.duvida,values.lista,values.ex,0,values.titulo]).then(data => {
+    query("INSERT INTO tb_duvidas (id,ra,nome,contato,duvida,lista,ex,status,titulo,email) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);",
+    [id,values.ra,values.nome,values.contato,values.duvida,values.lista,values.ex,0,values.titulo,values.email]).then(data => {
         if(data==-1)
             callback (values.res, -1);
         else
@@ -49,15 +49,24 @@ function retrievetListEx(values = {},callback){
     })
 }
 
+async function getUserByRA(values = {}){
+    let data = await query('select nome,email from tb_users WHERE ra=$1',[values.ra])
+        if(data==-1)
+            return(-1);
+        else{
+            return(data.rows[0])
+        }
+}
+
 //Function responsible for deciding which operation will take place
 // 1 = insert Question;
 // 2 = retrieve questions based on RA
 // 3 = retrieve question data based on the protocol
 // 4 = retrieve the lists and question quantity of each
-module.exports =  function opManager(values = {}, callback){
+module.exports =  async function opManager(values = {}, callback){
     switch(values.op){
         case 1:
-            if(values.ra!="" && values.nome!="" && values.contato!="" && values.duvida!="" && values.lista!="" && values.ex!="" && values.titulo!="")
+            if(values.ra!="" && values.nome!="" && values.duvida!="" && values.lista!="" && values.ex!="")
                 insertQuestion(values,callback);
             else return -1;
             break;
@@ -74,6 +83,13 @@ module.exports =  function opManager(values = {}, callback){
             break;
         case 4:
             retrievetListEx(values,callback);
+            break;
+        case 5:
+            if(values.ra)
+                return getUserByRA(values);
+            else 
+                return -1;
+            break;
         default:
             return;
     }

@@ -11,7 +11,7 @@ var select = document.getElementById("Lista");
 var choiceSelected = select.value;
 
 //If there's info from the previous question saved in cache, load it into the form
-let info = ["nome","RA","contato"];
+let info = ["RA","contato"];
 info.forEach(loadStoredInfo);
 
 //Gets all active lists from the database 
@@ -62,7 +62,7 @@ function loadCurrentExercises(lista){
 //Prepares to submit the form, checking all fields and validating the captcha
 function submitForm() {
 
-    fields = ["nome","contato","RA","Lista","Exercicios","duvida"]
+    fields = ["RA","Lista","Exercicios","duvida"]
     if(!checkFields(fields)){
         return
     }
@@ -89,7 +89,6 @@ function sendValues(token){
         type:"post",
         data:{
             ra: getElement("RA"),
-            nome: getElement("nome"),
             titulo: getElement("titulo"),
             contato: getElement("contato"),
             lista : $('#Lista').find(":selected").text(),
@@ -110,8 +109,10 @@ function sendValues(token){
                 card.style.display = "none"
     
             }else{
+                if(result.ra)
+                    alert("Ocorreu um erro verificando seu RA! Confira-o e tente novamente.")
                 //If captcha was the problem, inform the user of it
-                if(result.captcha)
+                else if(result.captcha)
                     alert("Não foi possível verificar o Captcha! Tente novamente mais tarde.")
                 else
                     alert("Um erro ocorreu! Tente novamente mais tarde.")
@@ -185,9 +186,8 @@ function loadNextPage(){
 
     formSubmitting = false;
 
-    fields = ["nome","contato","RA"]
+    fields = ["RA"]
     if(checkFields(fields)){
-        localStorage.setItem("nome", document.getElementById("nome").value);
         localStorage.setItem("contato", document.getElementById("contato").value);
         localStorage.setItem("RA", document.getElementById("RA").value);
 
