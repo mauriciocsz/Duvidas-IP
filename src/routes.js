@@ -69,10 +69,10 @@ router.post('/getQuestion',function(req,res){
     
 })
 
-router.post('/post', function(req,res,next){
+router.post('/post', async function(req,res,next){
 
-    let keyValores = ['ra','nome','contato','duvida','lista','ex'];
-    let maxSize = [6,40,40,6000,2,2]
+    let keyValores = ['ra','duvida','lista','ex'];
+    let maxSize = [6,6000,2,2]
 
     for(let x=0;x<keyValores.length;x++){
         if(req.body[keyValores[x]] === null || req.body[keyValores[x]] === undefined || req.body[keyValores[x]].length>maxSize[x]){
@@ -81,8 +81,21 @@ router.post('/post', function(req,res,next){
         }
     }
 
+    let dados = await dbmanager({op:5,ra:req.body.ra}, ()=>{})
+
+    if(dados===undefined || dados==-1){
+        res.send({ra:1})
+        return;
+    }   
+    let {nome, email} = dados;
+
     if(req.body["titulo"].length>40){
         res.send({res:0});
+        return;
+    }
+
+    if(req.body["contato"].length>40){
+        res.send({res:0})
         return;
     }
 
@@ -111,12 +124,13 @@ router.post('/post', function(req,res,next){
             var values = {
                 op: 1,
                 ra: req.body.ra,
-                nome: req.body.nome,
+                nome: nome,
                 contato: req.body.contato,
                 duvida: req.body.duvida,
                 lista: req.body.lista,
                 ex: req.body.ex,
                 titulo: req.body.titulo,
+                email: email,
                 res: resOri
             }
         

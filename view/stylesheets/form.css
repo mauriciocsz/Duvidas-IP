@@ -117,7 +117,7 @@
 @keyframes getBigger {
 
     0%{
-        max-height: 590px;
+        max-height: 470px;
     }
     100%{
         max-height: 800px;
@@ -131,7 +131,7 @@
         max-height: 800px;
     }
     100%{
-        max-height: 530px;
+        max-height: 500px;
     }
     
 }
