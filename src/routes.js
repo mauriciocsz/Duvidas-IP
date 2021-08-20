@@ -89,7 +89,7 @@ router.post('/post', async function(req,res,next){
     }   
     let {nome, email} = dados;
 
-    if(req.body["titulo"].length>40){
+    if(req.body["titulo"].length>60){
         res.send({res:0});
         return;
     }
