@@ -83,8 +83,14 @@ function loadBox(qs){
             status.style.color = "#DB4437"
             break;
         case 1:
-            status.innerText = "Respondida"
-            status.style.color = "#0F9D58"
+            if(qs.monitor){
+                status.innerText = "Respondida"
+                status.style.color = "#0F9D58"
+            }else{
+                status.innerText = "Prazo Excedido"
+                status.style.color = "#F4B400"
+            }
+            
             break;
         default:
             status.style.display = "none"
