@@ -21,8 +21,7 @@ um sistema de reconhecimento de estudante, com dados fornecidos pelo professor, 
 6. Após tudo isso, o projeto será inicializado em localhost:3000
 
 ## Autores
-Maurício Cândido de Souza
-Michel Ribeiro Koba
+Maurício Cândido de Souza & Michel Ribeiro Koba
 
 ## Screenshots
 ![Img1](https://i.imgur.com/PasPO88.png)
