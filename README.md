@@ -2,6 +2,10 @@
 ## Descrição
 Projeto de website para dúvidas da matéria de Introdução a Programação - UFSCAR.
 
+Este projeto foi criado com o intuito de ser um facilitador para alunos que acabaram de entrar na faculdade no modelo EaD, proporcionando uma espécie de fórum, onde alunos podem cadastrar suas dúvidas sem ter que se preocupar em quais monitores estão disponíveis e os poupando do trabalho de buscar pelo contato dos mesmos. 
+
+A sua implementação é bem simples, para os alunos é apresentado um site, no qual os alunos podem selecionar o exercício em questão e escrever sua dúvida, logo após o cadastro será emitido um código, que pode ser usado para acompanhar a situação da dúvida e comentários dos monitores. Para os monitores, as dúvidas ficam armazenadas em um banco de dados e contém todas informações tanto do aluno quanto da dúvida, permitindo que se já analisem o problema e se tornem responsáveis pela dúvida quando estiverem disponíveis para respondê-la.
+
 ## Recursos Utilizados
 Foram utilizadas várias tecnologias para o desenvolvimento do projeto, NodeJS para o backend, com várias bibliotecas usadas para criptografia e para o host (crypto, express, ...).
 Foi utilizado HTML e CSS para o front-end, utilizando-se do bootstrap para auxiliar o desenvolvimento.
